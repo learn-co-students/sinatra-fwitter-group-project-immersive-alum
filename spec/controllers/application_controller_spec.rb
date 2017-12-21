@@ -1,5 +1,5 @@
 require 'spec_helper'
-
+require 'pry'
 describe ApplicationController do
 
   describe "Homepage" do
@@ -128,18 +128,6 @@ describe ApplicationController do
       get '/tweets'
       expect(last_response.location).to include("/login")
     end
-
-    it 'does load /tweets if user is logged in' do
-      user = User.create(:username => "becky567", :email => "starz@aol.com", :password => "kittens")
-
-
-      visit '/login'
-
-      fill_in(:username, :with => "becky567")
-      fill_in(:password, :with => "kittens")
-      click_button 'submit'
-      expect(page.current_path).to eq('/tweets')
-    end
   end
 
   describe 'user show page' do
@@ -205,6 +193,7 @@ describe ApplicationController do
         fill_in(:username, :with => "becky567")
         fill_in(:password, :with => "kittens")
         click_button 'submit'
+
 
         visit '/tweets/new'
         fill_in(:content, :with => "tweet!!!")
